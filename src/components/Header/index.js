@@ -32,7 +32,7 @@ const Header = ({ links, toggle, isOpen }) => {
   return (
     <HeaderContainer>
       <HeaderLogoContainer>
-        <LogoLink to='/home' onClick={logoLinkFunction}>
+        <LogoLink to='/' onClick={logoLinkFunction}>
           <LogoIcon src={APPlogo} alt='logo' />
         </LogoLink>
         <LogoName>engineering app</LogoName>
