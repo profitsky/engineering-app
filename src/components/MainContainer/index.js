@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Routes from '../../Routes';
+
 // STYLED ELEMENTS
 import { MainWrapper, MainBackGround } from './MainContainer.styles';
 
@@ -10,6 +12,7 @@ const MainContainer = () => {
   return (
     <MainWrapper>
       <MainBackGround src={BCKGimage} />
+      <Routes />
     </MainWrapper>
   );
 };

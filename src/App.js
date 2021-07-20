@@ -23,7 +23,7 @@ function App() {
     <Router>
       <GlobalStyle />
       <Header links={links} toggle={handleOnClick} isOpen={isOpen} />
-      <MainContainer />
+      {/* <MainContainer /> */}
       <Sidebar links={links} toggle={handleOnClick} isOpen={isOpen} />
     </Router>
   );

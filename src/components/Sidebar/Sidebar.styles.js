@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-export const SidebarWrapper = styled.ul`
+export const SidebarWrapper = styled(motion.ul)`
   display: none;
 
   @media screen and (max-width: 768px) {
@@ -12,15 +13,12 @@ export const SidebarWrapper = styled.ul`
     min-width: 320px;
     background-color: var(--backgroundColor);
     top: var(--headerHeight);
-    left: 0;
     z-index: 5;
     display: flex;
     flex-direction: column;
     list-style: none;
     align-items: center;
     justify-content: flex-start;
-
-    left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
   }
 `;
 
@@ -48,9 +46,8 @@ export const SidebarLink = styled(Link)`
 
 export const SidebarIcon = styled.div`
   color: var(--white);
-  margin: 0.5rem 0;
+  margin: 0.5rem;
   font-size: 4rem;
-  left: 1rem;
   transition: all 0.3s ease-in-out;
 `;
 
@@ -111,8 +108,7 @@ export const SubMenuItemIcon = styled.div`
 `;
 
 export const SubmenuItemContainer = styled.div`
-  display: ${({ selected }) => (!selected ? 'none' : 'flex')};
-  transition: display 0.2s;
+  display: flex;
   width: 90%;
   margin-top: 1rem;
   margin-left: 2rem;

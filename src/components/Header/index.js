@@ -1,4 +1,5 @@
 import React from 'react';
+
 // STYLED ELEMENTS
 import {
   HeaderContainer,
@@ -19,6 +20,8 @@ import { FaBars } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
 
 const Header = ({ links, toggle, isOpen }) => {
+  let logoLinkFunction = isOpen ? toggle : null;
+
   const nawMenuItems = links.map((item, index) => (
     <NavItem key={index}>
       <span></span>
@@ -26,8 +29,6 @@ const Header = ({ links, toggle, isOpen }) => {
       <NavLink to={item.path}>{item.name}</NavLink>
     </NavItem>
   ));
-
-  let logoLinkFunction = isOpen ? toggle : null;
 
   return (
     <HeaderContainer>

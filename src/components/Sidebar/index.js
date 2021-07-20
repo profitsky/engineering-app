@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
-//COMPONENTS
-import Submenu from '../Submenu';
+import { AnimatePresence, motion } from 'framer-motion';
 
 // STYLED ELEMENTS
 import {
@@ -32,6 +30,10 @@ const Sidebar = ({ links, isOpen, toggle }) => {
   const [selected, setSelected] = useState(null);
   const prevSelected = usePrevious(selected);
 
+  useEffect(() => {
+    setSelected(null);
+  }, [isOpen]);
+
   //FUNCTIONS
   const handleMenuItemSelected = (name, current, previous) => {
     if (name === current) {
@@ -52,9 +54,11 @@ const Sidebar = ({ links, isOpen, toggle }) => {
 
     const subMenus = sidebarMenuItem.submenu.map((subMenu, subMenuIndex) => {
       return (
-        <SubmenuItemContainer key={subMenuIndex} selected={isItemSelected}>
+        <SubmenuItemContainer key={subMenuIndex}>
           <SubMenuItemIcon>{subMenu.icon}</SubMenuItemIcon>
-          <SubMenuItem to={subMenu.path}>{subMenu.name}</SubMenuItem>
+          <SubMenuItem to={subMenu.path} onClick={toggle}>
+            {subMenu.name}
+          </SubMenuItem>
         </SubmenuItemContainer>
       );
     });
@@ -77,9 +81,14 @@ const Sidebar = ({ links, isOpen, toggle }) => {
           }
         >
           <SidebarIcon>{sidebarMenuItem.icon}</SidebarIcon>
-          <SidebarLink to={sidebarMenuItem.path}>
-            {sidebarMenuItem.name}
-          </SidebarLink>
+          {!hasSubmenu ? (
+            <SidebarLink to={sidebarMenuItem.path}>
+              {sidebarMenuItem.name}
+            </SidebarLink>
+          ) : (
+            <SidebarLink to='/'>{sidebarMenuItem.name}</SidebarLink>
+          )}
+
           {hasSubmenu ? (
             <SubMenuIconWrapper>
               <SubMenuIcon>
@@ -90,58 +99,35 @@ const Sidebar = ({ links, isOpen, toggle }) => {
             </SubMenuIconWrapper>
           ) : null}
         </SidebarItem>
-        {subMenus}
+        {isItemSelected && (
+          <motion.div
+            initial={{ opacity: 0, x: '-100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {subMenus}
+          </motion.div>
+        )}
       </SidebarContainer>
     );
   });
 
   // SIDEBAR COMPONENT
 
-  return <SidebarWrapper isOpen={isOpen}>{sidebarMenuItems}</SidebarWrapper>;
-
-  // const [selected, setSelected] = useState(null);
-  // const handleMenuItemClick = (name) => {
-  //   setSelected(name);
-  // };
-  // const sidebarMenuItems = links.map((item, index) => {
-  //   const isItemSelected = selected === item.name;
-  //   const hasSubmenus = item.submenu.length;
-  //   const subMenus = item.submenu.map((subMenu, subMenuIndex) => {
-  //     return <SubMenuItem key={subMenuIndex}>{subMenu.name}</SubMenuItem>;
-  //   });
-  //   return (
-  //     <SidebarItem
-  //       key={index}
-  //       selected={isItemSelected}
-  //       onClick={hasSubmenus ? () => handleMenuItemClick(item.name) : toggle}
-  //     >
-  //       <SidebarLink to={item.path}>{item.name}</SidebarLink>
-  //       {hasSubmenus && (
-  //         <SidebarIcon>
-  //           {!isItemSelected && hasSubmenus ? (
-  //             <MdKeyboardArrowDown />
-  //           ) : (
-  //             <MdKeyboardArrowUp />
-  //           )}
-  //         </SidebarIcon>
-  //       )}
-  //       <SubmenuItemContainer selected={isItemSelected}>
-  //         {subMenus}
-  //       </SubmenuItemContainer>
-  //     </SidebarItem>
-  //   );
-  // });
-  // return (
-  //   <SidebarContainer isOpen={isOpen}>{sidebarMenuItems}</SidebarContainer>
-  // );
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <SidebarWrapper
+          initial={{ opacity: 0, x: '-100%' }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: '-100%' }}
+          transition={{ duration: 0.5 }}
+        >
+          {sidebarMenuItems}
+        </SidebarWrapper>
+      )}
+    </AnimatePresence>
+  );
 };
 
 export default Sidebar;
-
-//  const sidebarMenuItems = links.map((item, index) => {
-//    return (
-//      <SidebarItem key={index} onClick={toggle}>
-//        <SidebarLink to={item.path}>{item.name}</SidebarLink>
-//      </SidebarItem>
-//    );
-//  });
