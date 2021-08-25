@@ -1,30 +1,57 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // COMPONENTS
 import Header from './components/Header';
-import MainContainer from './components/MainContainer';
+import MainContainer from './components/MainContentContainer';
 import Sidebar from './components/Sidebar';
 
 // DUMMY DATA
 import { links } from './data/HeaderData';
 
-//Styles
+//STYLES
 import { GlobalStyle } from './GlobalStyle';
 
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
+//CONTEXT
+import OverlayContext from './context/overlayConext';
 
-  const handleOnClick = () => {
-    setIsOpen(!isOpen);
+function App() {
+  //STATES
+  const [isOpenSideBar, setIsOpenSideBar] = useState(false);
+  const [darkOverlay, setDarkOverlay] = useState(false);
+
+  console.log(darkOverlay);
+
+  //FUNCTIONS
+  const handleOnClickMobileIcon = () => {
+    setIsOpenSideBar(!isOpenSideBar);
+  };
+
+  const handleDarkOverlay = (isDark) => {
+    setDarkOverlay(isDark);
   };
 
   return (
     <Router>
-      <GlobalStyle />
-      <Header links={links} toggle={handleOnClick} isOpen={isOpen} />
-      {/* <MainContainer /> */}
-      <Sidebar links={links} toggle={handleOnClick} isOpen={isOpen} />
+      <OverlayContext.Provider
+        value={{
+          isOverlayDark: darkOverlay,
+          onChange: handleDarkOverlay,
+        }}
+      >
+        <GlobalStyle />
+        <Header
+          links={links}
+          toggle={handleOnClickMobileIcon}
+          isOpen={isOpenSideBar}
+        />
+        <MainContainer />
+      </OverlayContext.Provider>
+      <Sidebar
+        links={links}
+        toggle={handleOnClickMobileIcon}
+        isOpen={isOpenSideBar}
+      />
     </Router>
   );
 }

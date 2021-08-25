@@ -20,7 +20,10 @@ import { FaBars } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
 
 const Header = ({ links, toggle, isOpen }) => {
-  let logoLinkFunction = isOpen ? toggle : null;
+  // header logo functionality - returns function or null if side bar is opened
+  const logoLinkFunction = isOpen ? toggle : null;
+
+  //FUNCTIONS
 
   const nawMenuItems = links.map((item, index) => (
     <NavItem key={index}>

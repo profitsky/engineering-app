@@ -3,13 +3,14 @@ import React, { useContext, useEffect } from 'react';
 //CONTEX
 import OverlayContext from '../../context/overlayConext';
 
-const Cad = () => {
+const About = () => {
   const darkOverlay = useContext(OverlayContext);
 
   useEffect(() => {
-    darkOverlay.onChange(true);
+    darkOverlay.onChange(false);
   }, []);
-  return <h1>CAD GENERATORS</h1>;
+
+  return <h1>ABOUT</h1>;
 };
 
-export default Cad;
+export default About;

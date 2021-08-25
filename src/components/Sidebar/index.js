@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // STYLED ELEMENTS
@@ -17,6 +17,7 @@ import {
 
 const Sidebar = ({ links, isOpen, toggle }) => {
   //HOOKS
+  const [selected, setSelected] = useState(null);
 
   const usePrevious = (valve) => {
     const ref = useRef();
@@ -27,17 +28,12 @@ const Sidebar = ({ links, isOpen, toggle }) => {
     return ref.current;
   };
 
-  const [selected, setSelected] = useState(null);
   const prevSelected = usePrevious(selected);
-
-  useEffect(() => {
-    setSelected(null);
-  }, [isOpen]);
 
   //FUNCTIONS
   const handleMenuItemSelected = (name, current, previous) => {
     if (name === current) {
-      setSelected(null);
+      selected(null);
     } else if (
       (current && !previous) ||
       name === previous ||
@@ -46,6 +42,10 @@ const Sidebar = ({ links, isOpen, toggle }) => {
       setSelected(name);
     }
   };
+
+  useEffect(() => {
+    setSelected(null);
+  }, [isOpen, selected]);
 
   //JSX COMPONENTS
   const sidebarMenuItems = links.map((sidebarMenuItem, sibarMenuIndex) => {
@@ -66,7 +66,7 @@ const Sidebar = ({ links, isOpen, toggle }) => {
     return (
       <SidebarContainer key={sibarMenuIndex}>
         <SidebarItem
-          selected={isItemSelected}
+          selectedItem={isItemSelected}
           current={selected}
           previous={prevSelected}
           onClick={
@@ -118,9 +118,9 @@ const Sidebar = ({ links, isOpen, toggle }) => {
     <AnimatePresence>
       {isOpen && (
         <SidebarWrapper
-          initial={{ opacity: 0, x: '-100%' }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: '-100%' }}
+          initial={{ x: '-100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '-100%' }}
           transition={{ duration: 0.5 }}
         >
           {sidebarMenuItems}

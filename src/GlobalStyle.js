@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
     :root {
         --maxWidth: 1280px;
+        --minHeight: 768px;
         --bluishCyan: #08151B;
         --orange: #ffaf46;
         --white: #fff;
@@ -17,12 +18,14 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         z-index: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     body{        
         margin: 0 auto;
         font-family: 'Barlow Semi Condensed', sans-serif;
-        background-color: var(--backgroundColor);
+        background-color: var(--backgroundColor);        
         
         h1 {
             font-size: 3rem;
