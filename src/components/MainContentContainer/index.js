@@ -22,7 +22,7 @@ const MainContentContainer = () => {
   return (
     <MainWrapper>
       <MainBackGround src={BCKGimage} />
-      <MainOverlay darkOverlay={darkOverlay.isOverlayDark} />
+      <MainOverlay darkOverlay={darkOverlay.isOverlayDark} animate />
       <Routes />
     </MainWrapper>
   );
