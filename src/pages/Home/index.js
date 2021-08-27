@@ -8,6 +8,7 @@ import OverlayContext from '../../context/overlayConext';
 
 const Home = () => {
   const darkOverlay = useContext(OverlayContext);
+  console.log('ZAMONTOWANY');
 
   useEffect(() => {
     darkOverlay.onChange(false);

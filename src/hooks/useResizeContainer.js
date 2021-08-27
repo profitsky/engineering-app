@@ -1,10 +1,10 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const useResizeContainer = (ref, initialValue = 0) => {
+const useResizeContainer = (ref) => {
   const [height, setHeight] = useState();
   const [width, setWidth] = useState();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const listener = () => {
       setWidth(ref.current.clientWidth);
       setHeight(ref.current.clientHeight);
@@ -13,7 +13,6 @@ const useResizeContainer = (ref, initialValue = 0) => {
     window.addEventListener('resize', listener);
     return () => window.removeEventListener('resize', listener);
   });
-
   return {
     width,
     height,

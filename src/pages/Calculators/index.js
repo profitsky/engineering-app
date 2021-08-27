@@ -5,37 +5,38 @@ import { CalcWrapper } from './Calculators.styles';
 
 //COMPONENTS
 import FitsAndTolerances from './FitsAndTolerances';
+import Light from '../../components/Ui/Light';
 
 //CONTEX
 import OverlayContext from '../../context/overlayConext';
 
 //HOOKS
 import useMousePosition from '../../hooks/useMousePosition';
-import useResizeContainer from '../../hooks/useResizeContainer';
 
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
   const mainContainerData = useRef();
-  const dimensions = useResizeContainer(mainContainerData);
-  useMousePosition(mainContainerData);
+
+  const mousePosition = useMousePosition(mainContainerData);
   const [containerWidth, setContainerWidth] = useState();
   const [containerHeight, setContainerHeight] = useState();
 
   useEffect(() => {
     darkOverlay.onChange(true);
 
-    if (!containerHeight || containerWidth) {
-      setContainerHeight(mainContainerData.current.clientHeight);
+    const listener = () => {
       setContainerWidth(mainContainerData.current.clientWidth);
-    } else {
-      setContainerHeight(dimensions.height);
-      setContainerWidth(dimensions.width);
-    }
+      setContainerHeight(mainContainerData.current.clientHeight);
+    };
+    window.addEventListener('resize', listener);
+
+    return () => window.removeEventListener('resize', listener);
   }, []);
 
   return (
     <CalcWrapper ref={mainContainerData}>
       {/* <FitsAndTolerances></FitsAndTolerances> */}
+      <Light mousePosition={mousePosition} />
     </CalcWrapper>
   );
 };
