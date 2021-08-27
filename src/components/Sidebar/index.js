@@ -33,7 +33,7 @@ const Sidebar = ({ links, isOpen, toggle }) => {
   //FUNCTIONS
   const handleMenuItemSelected = (name, current, previous) => {
     if (name === current) {
-      selected(null);
+      setSelected(null);
     } else if (
       (current && !previous) ||
       name === previous ||

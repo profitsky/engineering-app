@@ -1,7 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { motion } from 'framer-motion';
-
-import Routes from '../../Routes';
+import React, { useContext } from 'react';
+// import { motion } from 'framer-motion';
 
 // STYLED ELEMENTS
 import {
@@ -9,6 +7,9 @@ import {
   MainBackGround,
   MainOverlay,
 } from './MainContentContainer.styles';
+
+//COMPONENTS
+import Routes from '../../Routes';
 
 //CONTEX
 import OverlayContext from '../../context/overlayConext';
@@ -22,7 +23,7 @@ const MainContentContainer = () => {
   return (
     <MainWrapper>
       <MainBackGround src={BCKGimage} />
-      <MainOverlay darkOverlay={darkOverlay.isOverlayDark} animate />
+      <MainOverlay darkOverlay={darkOverlay.isOverlayDark} />
       <Routes />
     </MainWrapper>
   );

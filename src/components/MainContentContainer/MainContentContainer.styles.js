@@ -31,5 +31,5 @@ export const MainOverlay = styled(motion.div)`
   bottom: 0;
   right: 0;
   background-color: black;
-  opacity: ${({ darkOverlay }) => (darkOverlay ? '0.8' : '0')};
+  opacity: ${({ darkOverlay }) => (darkOverlay ? '1' : '0')};
 `;

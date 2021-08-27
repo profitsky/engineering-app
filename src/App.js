@@ -20,8 +20,6 @@ function App() {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
   const [darkOverlay, setDarkOverlay] = useState(false);
 
-  console.log(darkOverlay);
-
   //FUNCTIONS
   const handleOnClickMobileIcon = () => {
     setIsOpenSideBar(!isOpenSideBar);
@@ -45,7 +43,7 @@ function App() {
           toggle={handleOnClickMobileIcon}
           isOpen={isOpenSideBar}
         />
-        <MainContainer />
+        <MainContainer></MainContainer>
       </OverlayContext.Provider>
       <Sidebar
         links={links}
