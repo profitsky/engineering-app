@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     :root {
+    
         --maxWidth: 1280px;
         --minHeight: 768px;
         --bluishCyan: #08151B;
@@ -9,6 +10,10 @@ export const GlobalStyle = createGlobalStyle`
         --white: #fff;
         --headerHeight: 82px;
         --backgroundColor: #182f37;
+        --hexagonGridCellBackground: black;
+        --hexagonGridCellStroke: rgba(48, 72, 85, 0.5);
+        --chevronGridCellStroke: rgba(48, 72, 85, 1);
+       
   }
 
     *,

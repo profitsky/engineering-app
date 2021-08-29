@@ -6,7 +6,6 @@ import {
   HexDummy,
   HexagonMainContainer,
   HexagonBorder,
-  HexagonContent,
 } from './HexagonShape.styles';
 
 const HexagonShape = (props) => {
@@ -17,7 +16,6 @@ const HexagonShape = (props) => {
       <HexDummy></HexDummy>
       <HexagonMainContainer>
         <HexagonBorder></HexagonBorder>
-        <HexagonContent>S</HexagonContent>
       </HexagonMainContainer>
     </Wrapper>
   );

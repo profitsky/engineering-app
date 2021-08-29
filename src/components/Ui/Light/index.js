@@ -20,7 +20,6 @@ const Light = ({ mousePosition }) => {
   };
 
   useEffect(() => {
-    // console.log(light.current.getBoundingClientRect().top);
     console.log(lightContainer.current.getBoundingClientRect().left);
     mergeMousePositionAndLight();
   });
@@ -32,8 +31,6 @@ const Light = ({ mousePosition }) => {
           transform: `translate(${lightPositionX}px, ${lightPositionY}px)`,
         }}
       />
-      {/* <h1>{`pozycja X : ${mousePositionX}`}</h1>
-      <h1>{`pozycja Y : ${mousePositionY}`}</h1> */}
     </LightMainContainer>
   );
 };

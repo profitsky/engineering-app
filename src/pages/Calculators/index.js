@@ -1,17 +1,25 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
 // STYLED ELEMENTS
-import { CalcWrapper } from './Calculators.styles';
+import {
+  CalcWrapper,
+  CalcSceneWrapper,
+  CalcScene,
+  CalcOverlay,
+} from './Calculators.styles';
 
 //COMPONENTS
 import FitsAndTolerances from './FitsAndTolerances';
 import Light from '../../components/Ui/Light';
+import HudUiFrame from '../../components/HudUiFrame';
+import HexagonGrid from '../../components/Ui/HexagonGrid';
 
 //CONTEX
 import OverlayContext from '../../context/overlayConext';
 
 //HOOKS
 import useMousePosition from '../../hooks/useMousePosition';
+import HexagonShape from '../../components/Ui/HexagonShape';
 
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
@@ -35,8 +43,19 @@ const Calculators = () => {
 
   return (
     <CalcWrapper ref={mainContainerData}>
-      {/* <FitsAndTolerances></FitsAndTolerances> */}
-      <Light mousePosition={mousePosition} />
+      <CalcOverlay></CalcOverlay>
+
+      <CalcSceneWrapper>
+        <Light mousePosition={mousePosition} />
+
+        <CalcScene>
+          <HexagonGrid />
+          {/* <FitsAndTolerances></FitsAndTolerances> */}
+          {/* <HudUiFrame />
+      <Light mousePosition={mousePosition} /> */}
+          {/* <HexagonShape /> */}
+        </CalcScene>
+      </CalcSceneWrapper>
     </CalcWrapper>
   );
 };
