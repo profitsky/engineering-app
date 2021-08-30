@@ -25,7 +25,7 @@ const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
   const mainContainerData = useRef();
 
-  const mousePosition = useMousePosition(mainContainerData);
+  // const mousePosition = useMousePosition(mainContainerData);
   const [containerWidth, setContainerWidth] = useState();
   const [containerHeight, setContainerHeight] = useState();
 
@@ -46,7 +46,7 @@ const Calculators = () => {
       <CalcOverlay></CalcOverlay>
 
       <CalcSceneWrapper>
-        <Light mousePosition={mousePosition} />
+        {/* <Light mousePosition={mousePosition} /> */}
 
         <CalcScene>
           <HexagonGrid />
