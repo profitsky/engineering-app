@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
+// IMAGES
+import calcMenuLayout from '../../images/calcMenuLayout.svg';
+
 // STYLED ELEMENTS
 import {
   CalcWrapper,
@@ -20,6 +23,9 @@ import OverlayContext from '../../context/overlayConext';
 //HOOKS
 import useMousePosition from '../../hooks/useMousePosition';
 import HexagonShape from '../../components/Ui/HexagonShape';
+
+//HELPERS
+import svgConverter from './../../helpers/svgConverter';
 
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);

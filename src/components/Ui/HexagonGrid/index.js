@@ -1,80 +1,91 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 //STYLED COMPONENTS
-import {
-  HexagonGridMainContainer,
-  HexagonGridSvg,
-  ActiveCellSvg,
-} from './HexagonGrid.styles';
+import { HexagonGridMainContainer, HexagonGridSvg } from './HexagonGrid.styles';
+
+//IMAGES
+import calcMenuLayout from '../../../images/calcMenuLayout.svg';
+
 //COMPONENTS
+import HexagonCell from './HexagonCell';
 
-const list = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
+//HELPERS
+import svgConverter from '../../../helpers/svgConverter';
 
-const item = {
-  visible: { opacity: 1, x: 0 },
-  hidden: { opacity: 0, x: -100 },
-};
-
-const HexagonGrid = (props) => {
-  const [blink, setBlink] = useState(false);
-
-  const data = [
+const HexagonGrid = () => {
+  const [blink, setBlink] = useState();
+  const [svgHexCells, setsvgHexCells] = useState([
     {
-      index: 1,
-      d: 'M240 547.8L264.71 590.6H314.13L338.84 547.8L314.13 505H264.71L240 547.8Z',
-      fill: 'yellow',
-      cursor: 'pointer',
-      onClick: () => console.log('siema'),
-      whileHover: { scale: 4, transition: { duration: 0.3 } },
+      id: 0,
+      d: '',
+      fill: '',
+      stroke: '',
     },
-    {
-      index: 2,
-      d: 'M557 272.8L581.71 315.6H631.13L655.84 272.8L631.13 230H581.71L557 272.8Z',
-      fill: 'white',
-      cursor: 'pointer',
-      onClick: () => console.log('siema'),
-      whileHover: { scale: 4, transition: { duration: 0.3 } },
-    },
-    {
-      index: 3,
-      d: 'M81 272.8L105.71 315.6H155.13L179.84 272.8L155.13 230H105.71L81 272.8Z"',
-      fill: 'white',
-      cursor: 'pointer',
-      onClick: () => console.log('siema'),
-      whileHover: blink
-        ? { scale: 4, x: 150, transition: { duration: 0.3 } }
-        : null,
-    },
-  ];
+  ]);
+  const [loading, setLoading] = useState(true);
 
-  const cellRender = data.map((props) => {
+  console.log(loading);
+
+  const getLayout = async () => {
+    try {
+      const res = await svgConverter(calcMenuLayout);
+
+      setTimeout(() => {
+        setsvgHexCells(res);
+        setLoading(false);
+      }, 1000);
+    } catch (error) {
+      console.log(
+        `There is something wrong with a file, current error status ${error}`
+      );
+    }
+  };
+
+  useEffect(() => {
+    getLayout();
+
+    const usedNumberArray = [];
+    let randomNumber = null;
+
+    // const idIntevral = setInterval(() => {
+    //   do {
+    //     randomNumber = Math.floor(Math.random() * data.length);
+    //   } while (usedNumberArray.includes(randomNumber));
+    //   usedNumberArray.push(randomNumber);
+    //   if (usedNumberArray.length === data.length) {
+    //     usedNumberArray.length = 0;
+    //     usedNumberArray[0] = randomNumber;
+    //   }
+    //   setBlink(randomNumber);
+    // }, 1000);
+
+    // return () => clearInterval(idIntevral);
+  }, []);
+
+  const gridCellRender = svgHexCells.map((data) => {
+    // const istemIsBlink = blink === data.index;
+
     return (
-      <>
-        <ActiveCellSvg key={props.index} {...props} />
-        <h1>{props.index}</h1>
-      </>
+      <HexagonCell
+        // fill={istemIsBlink ? 'white' : 'red'}
+        key={data.id}
+        d={data.d}
+        fill={data.fill}
+        stroke={data.stroke}
+      />
     );
   });
 
-  console.log(cellRender);
-  return (
+  console.log(gridCellRender);
+
+  return loading ? (
+    <div>
+      <h1>Sie laduje</h1>
+    </div>
+  ) : (
     <HexagonGridMainContainer>
-      <HexagonGridSvg
-        initial={{ y: 250 }}
-        animate={{ y: -10 }}
-        transition={{ delay: 0.2, type: 'spring', stiffness: 1 }}
-        width='1291'
-        height='727'
-        viewBox='0 0 1291 727'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        {cellRender}
-      </HexagonGridSvg>
+      <HexagonGridSvg>{gridCellRender}</HexagonGridSvg>
     </HexagonGridMainContainer>
   );
 };

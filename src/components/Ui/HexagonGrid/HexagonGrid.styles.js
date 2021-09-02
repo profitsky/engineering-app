@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 export const HexagonGridMainContainer = styled.section`
   width: 100%;
   height: 100%;
-  top: 13vh;
-  left: 30vw;
+  top: 30vh;
+  left: 35vw;
   position: absolute;
 `;
 
