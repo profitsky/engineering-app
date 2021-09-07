@@ -20,6 +20,8 @@ import { FaBars } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
 
 const Header = ({ links, toggle, isOpen }) => {
+  console.log('ZAMONTOWANY GRID HEADER');
+
   // header logo functionality - returns function or null if side bar is opened
   const logoLinkFunction = isOpen ? toggle : null;
 

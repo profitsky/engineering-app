@@ -16,6 +16,7 @@ import { GlobalStyle } from './GlobalStyle';
 import OverlayContext from './context/overlayConext';
 
 function App() {
+  console.log('ZAMONTOWANY APP');
   //STATES
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
   const [darkOverlay, setDarkOverlay] = useState(false);

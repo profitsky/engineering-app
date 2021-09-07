@@ -1,8 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-// IMAGES
-import calcMenuLayout from '../../images/calcMenuLayout.svg';
-
 // STYLED ELEMENTS
 import {
   CalcWrapper,
@@ -12,9 +9,9 @@ import {
 } from './Calculators.styles';
 
 //COMPONENTS
-import FitsAndTolerances from './FitsAndTolerances';
+
 import Light from '../../components/Ui/Light';
-import HudUiFrame from '../../components/HudUiFrame';
+
 import HexagonGrid from '../../components/Ui/HexagonGrid';
 
 //CONTEX
@@ -24,14 +21,11 @@ import OverlayContext from '../../context/overlayConext';
 import useMousePosition from '../../hooks/useMousePosition';
 import HexagonShape from '../../components/Ui/HexagonShape';
 
-//HELPERS
-import svgConverter from './../../helpers/svgConverter';
-
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
   const mainContainerData = useRef();
 
-  // const mousePosition = useMousePosition(mainContainerData);
+  const mousePosition = useMousePosition(mainContainerData);
   const [containerWidth, setContainerWidth] = useState();
   const [containerHeight, setContainerHeight] = useState();
 
@@ -52,14 +46,11 @@ const Calculators = () => {
       <CalcOverlay></CalcOverlay>
 
       <CalcSceneWrapper>
-        {/* <Light mousePosition={mousePosition} /> */}
+        <Light mousePosition={mousePosition} />
 
         <CalcScene>
           <HexagonGrid />
-          {/* <FitsAndTolerances></FitsAndTolerances> */}
-          {/* <HudUiFrame />
-      <Light mousePosition={mousePosition} /> */}
-          {/* <HexagonShape /> */}
+          {/* <Light mousePosition={mousePosition} /> */}
         </CalcScene>
       </CalcSceneWrapper>
     </CalcWrapper>

@@ -8,9 +8,6 @@ export const LightMainContainer = styled.div`
 export const LighBoxShadow = styled.div`
   position: absolute;
   opacity: 1;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   width: 1px;
   height: 1px;
   border-radius: 50%;

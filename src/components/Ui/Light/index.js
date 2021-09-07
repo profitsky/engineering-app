@@ -20,7 +20,6 @@ const Light = ({ mousePosition }) => {
   };
 
   useEffect(() => {
-    console.log(lightContainer.current.getBoundingClientRect().left);
     mergeMousePositionAndLight();
   });
 
