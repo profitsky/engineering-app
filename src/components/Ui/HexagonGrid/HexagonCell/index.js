@@ -10,9 +10,32 @@ const HexagonCell = (props) => {
       key={props.id}
       fill={props.fill}
       d={props.d}
+      delay={props.delay}
       stroke={props.stroke}
+      initial={{ opacity: 1, fill: '#000000', scale: 1 }}
+      animate={{
+        opacity: 1,
+
+        fill: [
+          '#000000',
+          '#304855',
+          '#000000',
+          '#000000',
+          '#000000',
+          '#000000',
+          '#000000',
+          '#000000',
+        ],
+        scale: [1, 0.9, 1, 1, 1, 1, 1, 1],
+      }}
+      transition={{
+        delay: props.delay,
+        ease: 'easeInOut',
+        duration: 6,
+        repeat: Infinity,
+      }}
     ></HexagonSvg>
   );
 };
 
-export default React.memo(HexagonCell);
+export default HexagonCell;

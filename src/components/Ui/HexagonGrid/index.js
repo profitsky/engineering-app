@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 //STYLED COMPONENTS
 import { HexagonGridMainContainer, HexagonGridSvg } from './HexagonGrid.styles';
@@ -16,89 +16,39 @@ import svgConverter from '../../../helpers/svgConverter';
 
 //EXTERNAL DATA
 const translatedSvgFile = svgConverter(svgHexLayout);
-const hexCellArray = translatedSvgFile.filter((element, index) => index < 120);
+const hexCellArray = translatedSvgFile.filter((element, index) => index < 151);
 const hexChevronArray = translatedSvgFile.filter(
-  (element, index) => index >= 120 && index < 240
+  (element, index) => index >= 151 && index < 300
 );
 
-// FUNCTIONS
-let randomNumber = null;
-const usedNumberArray = [];
+let shuffleNumberArray = [];
+const shuffleSet = new Set();
 
-function test() {
-  const idI = setInterval(() => {
-    console.log('siema');
-  }, 1000);
-
-  return idI;
+function huffleCards() {
+  do {
+    shuffleSet.add(Math.floor(Math.random() * (hexCellArray.length + 1)));
+  } while (shuffleSet.size <= hexCellArray.length);
+  shuffleNumberArray = [...shuffleSet];
 }
 
-const switchIsBlink = (array) => {
-  setInterval(() => {
-    do {
-      randomNumber = Math.floor(Math.random() * array.length);
-    } while (usedNumberArray.includes(randomNumber));
-    usedNumberArray.push(randomNumber);
-    if (usedNumberArray.length === array.length) {
-      usedNumberArray.length = 0;
-      usedNumberArray[0] = randomNumber;
-    }
-
-    return randomNumber;
-  }, 1000);
-};
-
 const HexagonGrid = () => {
-  let counter = 1;
+  huffleCards();
 
-  //STATES
-  console.log('ZAMONTOWANY GRID LAYOUT');
-  const [blink, setBlink] = useState(false);
-
-  const [svgHexCells, setSvgHexCells] = useState([]);
-  const [svgChevron, setSvgChevron] = useState([{}]);
-  const [svgIcon, setSvgIcon] = useState([{}]);
-  const [loading, setLoading] = useState(true);
-
-  //FUNCTIONS
-
-  const assignCells = () => {
-    setSvgHexCells(hexCellArray);
-    setSvgChevron(hexChevronArray);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    assignCells();
-    const interval = setInterval(() => {
-      do {
-        randomNumber = Math.floor(Math.random() * hexCellArray.length);
-      } while (usedNumberArray.includes(randomNumber));
-      usedNumberArray.push(randomNumber);
-      if (usedNumberArray.length === hexCellArray.length) {
-        usedNumberArray.length = 0;
-        usedNumberArray[0] = randomNumber;
-      }
-      setBlink(randomNumber);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
-
-  //GRID RENDER
-  const gridCellRender = svgHexCells.map((data) => {
-    const istemIsBlink = blink === data.id;
+  //CELL GRID RENDER
+  const gridCellRender = hexCellArray.map((data) => {
     return (
       <HexagonCell
         key={data.id}
         d={data.d}
-        fill={istemIsBlink ? 'white' : data.fill}
+        fill={data.fill}
         stroke={data.stroke}
+        delay={shuffleNumberArray[data.id] * 2}
       />
     );
   });
 
   //CHEVRON RENDER
-  const chevronCellRender = svgChevron.map((data) => {
+  const chevronCellRender = hexChevronArray.map((data) => {
     return <ChevronCell key={data.id} d={data.d} stroke={data.stroke} />;
   });
 

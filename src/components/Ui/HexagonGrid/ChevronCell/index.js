@@ -14,4 +14,4 @@ const ChevronCell = (props) => {
   );
 };
 
-export default React.memo(ChevronCell);
+export default ChevronCell;

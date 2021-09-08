@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const HexagonGridMainContainer = styled.section`
   width: 100%;
-  height: 100%;
-  top: 25vh;
+  height: 120%;
+  top: 8vh;
   left: 15vw;
   /* left: 5vw; */
   position: absolute;

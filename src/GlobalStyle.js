@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
         --white: #fff;
         --headerHeight: 82px;
         --backgroundColor: #182f37;
-        --hexagonGridCellBackground: black;
+        --hexagonGridCellBackground: rgb(0,0,0);
         --hexagonGridCellStroke: rgba(48, 72, 85, 0.5);
         --chevronGridCellStroke: rgba(48, 72, 85, 1);
        
