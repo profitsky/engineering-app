@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const CalcWrapper = styled.section`
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
 `;
@@ -11,16 +15,17 @@ export const CalcSceneWrapper = styled.div`
   perspective: 100px;
   width: 100%;
   height: 100%;
+  position: relative;
 `;
 
 export const CalcScene = styled.div`
   position: absolute;
-  height: 100%;
+  height: 120%;
   width: 100%;
   top: 0;
   left: 0;
   transform-origin: left;
-  transform: rotateY(2deg) translateY(-15%);
+  transform: rotateY(2deg) translateY(0);
   filter: blur(0.5px);
 `;
 

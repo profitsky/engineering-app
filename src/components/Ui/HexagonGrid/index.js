@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 
 //STYLED COMPONENTS
 import { HexagonGridMainContainer, HexagonGridSvg } from './HexagonGrid.styles';
@@ -16,22 +15,25 @@ import svgConverter from '../../../helpers/svgConverter';
 
 //EXTERNAL DATA
 const translatedSvgFile = svgConverter(svgHexLayout);
-const hexCellArray = translatedSvgFile.filter((element, index) => index < 151);
+
+//GRID ARRANGEMENT
+const hexCellArray = translatedSvgFile.filter((element, index) => index < 147);
 const hexChevronArray = translatedSvgFile.filter(
-  (element, index) => index >= 151 && index < 300
+  (element, index) => index >= 147
 );
 
 let shuffleNumberArray = [];
 const shuffleSet = new Set();
 
+//SHUFFLE FUNCTION
 function huffleCards() {
   do {
-    shuffleSet.add(Math.floor(Math.random() * (hexCellArray.length + 1)));
-  } while (shuffleSet.size <= hexCellArray.length);
+    shuffleSet.add(Math.floor(Math.random() * hexCellArray.length));
+  } while (shuffleSet.size <= hexCellArray.length - 1);
   shuffleNumberArray = [...shuffleSet];
 }
 
-const HexagonGrid = () => {
+const HexagonGrid = (props) => {
   huffleCards();
 
   //CELL GRID RENDER
@@ -39,10 +41,32 @@ const HexagonGrid = () => {
     return (
       <HexagonCell
         key={data.id}
+        id={data.id}
         d={data.d}
         fill={data.fill}
         stroke={data.stroke}
-        delay={shuffleNumberArray[data.id] * 2}
+        initial={{ opacity: 1, fill: '#000000' }}
+        animate={{
+          opacity: 1,
+          fill: [
+            '#000000',
+            '#304855',
+            '#000000',
+            '#000000',
+            '#000000',
+            '#000000',
+            '#000000',
+            '#000000',
+          ],
+          scale: [1, 0.9, 1, 1, 1, 1, 1, 1],
+        }}
+        transition={{
+          ease: 'easeInOut',
+          duration: 8,
+          delay: `${shuffleNumberArray[data.id] * 2}`,
+          repeat: Infinity,
+          repeatDelay: 25,
+        }}
       />
     );
   });

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HexagonGridMainContainer = styled.section`
+export const HexagonIconContainer = styled.svg`
   width: 100%;
   height: 100%;
   top: -15vh;
@@ -9,7 +9,7 @@ export const HexagonGridMainContainer = styled.section`
   transform: scale(1.5);
 `;
 
-export const HexagonGridSvg = styled.svg`
+export const HexagonIconGridSvg = styled.svg`
   position: absolute;
   top: 0;
   left: 0;

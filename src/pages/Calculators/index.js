@@ -8,49 +8,48 @@ import {
   CalcOverlay,
 } from './Calculators.styles';
 
+//ICONS
+import { ReactComponent as RetainingRings } from '../../images/RetainingIcon.svg';
+import { ReactComponent as FitsAndTolerancesIcon } from '../../images/FitsIcon.svg';
+import { ReactComponent as CouterboreAndCountersinkIcon } from '../../images/CboreIcon.svg';
+
 //COMPONENTS
-
 import Light from '../../components/Ui/Light';
-
 import HexagonGrid from '../../components/Ui/HexagonGrid';
+import HexagonIcon from '../../components/Ui/HexagonIcon';
 
 //CONTEX
 import OverlayContext from '../../context/overlayConext';
 
 //HOOKS
 import useMousePosition from '../../hooks/useMousePosition';
-import HexagonShape from '../../components/Ui/HexagonShape';
 
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
   const mainContainerData = useRef();
 
   const mousePosition = useMousePosition(mainContainerData);
-  const [containerWidth, setContainerWidth] = useState();
-  const [containerHeight, setContainerHeight] = useState();
 
   useEffect(() => {
     darkOverlay.onChange(true);
-
-    const listener = () => {
-      setContainerWidth(mainContainerData.current.clientWidth);
-      setContainerHeight(mainContainerData.current.clientHeight);
-    };
-    window.addEventListener('resize', listener);
-
-    return () => window.removeEventListener('resize', listener);
   }, []);
 
   return (
     <CalcWrapper ref={mainContainerData}>
-      <CalcOverlay></CalcOverlay>
-
       <CalcSceneWrapper>
+        <CalcOverlay></CalcOverlay>
         <Light mousePosition={mousePosition} />
-
         <CalcScene>
-          <HexagonGrid />
-          {/* <Light mousePosition={mousePosition} /> */}
+          <HexagonGrid></HexagonGrid>
+          <HexagonIcon>
+            <RetainingRings />
+          </HexagonIcon>
+          <HexagonIcon>
+            <FitsAndTolerancesIcon />
+          </HexagonIcon>
+          <HexagonIcon>
+            <CouterboreAndCountersinkIcon />
+          </HexagonIcon>
         </CalcScene>
       </CalcSceneWrapper>
     </CalcWrapper>
