@@ -22,6 +22,7 @@ export const MainBackGround = styled.img`
   background-position: center;
   background-repeat: no-repeat;
   object-fit: cover;
+  pointer-events: none;
 `;
 
 export const MainOverlay = styled(motion.div)`
@@ -32,4 +33,5 @@ export const MainOverlay = styled(motion.div)`
   right: 0;
   background-color: black;
   opacity: ${({ darkOverlay }) => (darkOverlay ? '1' : '0')};
+  pointer-events: none;
 `;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 // STYLED ELEMENTS
 import {
@@ -9,9 +9,9 @@ import {
 } from './Calculators.styles';
 
 //ICONS
-import { ReactComponent as RetainingRings } from '../../images/RetainingIcon.svg';
-import { ReactComponent as FitsAndTolerancesIcon } from '../../images/FitsIcon.svg';
-import { ReactComponent as CouterboreAndCountersinkIcon } from '../../images/CboreIcon.svg';
+import FitsAndTolerancesSvgIcon from '../../components/CalcMenuUi/FitsAndTolerancesSvgIcon';
+import CouterboreAndCountersinkIcon from '../../components/CalcMenuUi/CouterboreAndCountersinkSvgIcon';
+import RetainingRingsSvgIcon from '../../components/CalcMenuUi/RetainingRingsSvgIcon';
 
 //COMPONENTS
 import Light from '../../components/Ui/Light';
@@ -26,30 +26,23 @@ import useMousePosition from '../../hooks/useMousePosition';
 
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
-  const mainContainerData = useRef();
 
-  const mousePosition = useMousePosition(mainContainerData);
+  const mousePosition = useMousePosition();
 
   useEffect(() => {
     darkOverlay.onChange(true);
   }, []);
 
   return (
-    <CalcWrapper ref={mainContainerData}>
+    <CalcWrapper>
       <CalcSceneWrapper>
         <CalcOverlay></CalcOverlay>
         <Light mousePosition={mousePosition} />
         <CalcScene>
-          <HexagonGrid></HexagonGrid>
-          <HexagonIcon>
-            <RetainingRings />
-          </HexagonIcon>
-          <HexagonIcon>
-            <FitsAndTolerancesIcon />
-          </HexagonIcon>
-          <HexagonIcon>
-            <CouterboreAndCountersinkIcon />
-          </HexagonIcon>
+          <HexagonGrid />
+          <FitsAndTolerancesSvgIcon />
+          <CouterboreAndCountersinkIcon />
+          <RetainingRingsSvgIcon />
         </CalcScene>
       </CalcSceneWrapper>
     </CalcWrapper>

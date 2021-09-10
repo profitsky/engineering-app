@@ -19,13 +19,13 @@ export const CalcSceneWrapper = styled.div`
 `;
 
 export const CalcScene = styled.div`
-  position: absolute;
-  height: 120%;
+  position: relative;
+  height: 1006px;
   width: 100%;
   top: 0;
   left: 0;
   transform-origin: left;
-  transform: rotateY(2deg) translateY(0);
+  transform: rotateY(2deg) translateY(-10%);
   filter: blur(0.5px);
 `;
 

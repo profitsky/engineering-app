@@ -77,12 +77,12 @@ const HexagonGrid = (props) => {
   });
 
   return (
-    <HexagonGridMainContainer>
-      <HexagonGridSvg>
-        {gridCellRender}
-        {chevronCellRender}
-      </HexagonGridSvg>
-    </HexagonGridMainContainer>
+    // <HexagonGridMainContainer>
+    <HexagonGridSvg>
+      {gridCellRender}
+      {chevronCellRender}
+    </HexagonGridSvg>
+    // </HexagonGridMainContainer>
   );
 };
 

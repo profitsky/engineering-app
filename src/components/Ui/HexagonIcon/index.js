@@ -3,9 +3,11 @@ import React from 'react';
 import { HexagonIconContainer, HexagonIconGridSvg } from './HexagonIcon.styles';
 
 const HexagonIcon = (props) => {
+  const { children } = props;
+
   return (
     <HexagonIconContainer>
-      <HexagonIconGridSvg>{props.children}</HexagonIconGridSvg>
+      <HexagonIconGridSvg>{children}</HexagonIconGridSvg>
     </HexagonIconContainer>
   );
 };
