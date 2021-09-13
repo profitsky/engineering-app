@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { SvgIcon } from './RetainingRingsSvgIcon.styles';
 
-const RetainingRingsSvgIcon = () => {
+const RetainingRingsSvgIcon = ({ handleOnHover }) => {
+  const buttonRef = useRef();
   return (
     <SvgIcon
       width='1294'
       height='1006'
       viewBox='0 0 1294 1006'
       xmlns='http://www.w3.org/2000/svg'
+      label='retainin rings'
+      onMouseEnter={() => {
+        handleOnHover(true, buttonRef.current.getAttribute('label'));
+      }}
+      onMouseLeave={() => {
+        handleOnHover(false, buttonRef);
+      }}
+      ref={buttonRef}
     >
       <g className='rrings'>
         <path
@@ -52,8 +61,39 @@ const RetainingRingsSvgIcon = () => {
           d='M129.09 523.3C123.614 523.3 118.466 521.168 114.594 517.296C110.722 513.424 108.59 508.276 108.59 502.8C108.59 498.923 109.68 495.148 111.737 491.881C113.739 488.706 116.568 486.141 119.919 484.463L121.641 487.899C118.917 489.265 116.616 491.351 114.989 493.931C113.318 496.581 112.434 499.648 112.434 502.8C112.434 511.984 119.906 519.456 129.09 519.456C138.274 519.456 145.747 511.984 145.747 502.8C145.747 499.648 144.863 496.583 143.192 493.931C141.565 491.348 139.264 489.262 136.54 487.899L138.262 484.463C141.613 486.141 144.442 488.706 146.444 491.881C148.501 495.146 149.59 498.923 149.59 502.8C149.59 508.276 147.458 513.424 143.587 517.296C139.715 521.168 134.567 523.3 129.09 523.3Z'
         />
       </g>
+      <filter
+        id='fire'
+        width='110%'
+        height='110%'
+        x='-10%'
+        y='-10%'
+        filterUnits='userSpaceOnUse'
+      >
+        <feFlood result='flood' floodColor='#ffaf46' floodOpacity='1'></feFlood>
+        <feComposite
+          in='flood'
+          result='mask'
+          in2='SourceGraphic'
+          operator='in'
+        ></feComposite>
+        <feMorphology
+          in='mask'
+          result='dilated'
+          operator='dilate'
+          radius='1.5'
+        ></feMorphology>
+        <feGaussianBlur
+          in='dilated'
+          result='blurred'
+          stdDeviation='7'
+        ></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in='blurred'></feMergeNode>
+          <feMergeNode in='SourceGraphic'></feMergeNode>
+        </feMerge>
+      </filter>
     </SvgIcon>
   );
 };
 
-export default RetainingRingsSvgIcon;
+export default React.memo(RetainingRingsSvgIcon);

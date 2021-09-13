@@ -32,7 +32,8 @@ export const GlobalStyle = createGlobalStyle`
     body{        
         margin: 0 auto;
         font-family: 'Barlow Semi Condensed', sans-serif;
-        background-color: var(--backgroundColor);     
+        background-color: var(--backgroundColor);
+        max-height:768px  ;
        
         
         h1 {

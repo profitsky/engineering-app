@@ -18,5 +18,4 @@ export const HudCompassSVG = styled(motion.svg)`
   filter: url(#fire);
   stroke-linejoin: round;
   stroke-linecap: round;
-  #
 `;

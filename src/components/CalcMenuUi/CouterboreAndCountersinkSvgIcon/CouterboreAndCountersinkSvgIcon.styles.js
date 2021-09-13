@@ -12,7 +12,7 @@ export const SvgIconContainer = styled.section`
 export const SvgIcon = styled.svg`
   transform: scale(1.5);
   position: fixed;
-  top: 1px;
+  top: 39px;
   left: 294px;
   width: 100%;
   height: 100%;
@@ -23,21 +23,34 @@ export const SvgIcon = styled.svg`
     cursor: pointer;
     z-index: 2;
     pointer-events: auto;
+
+    &:hover .circle,
+    &:hover .icon,
+    &:hover .frame {
+      fill: white;
+      filter: url(#fire);
+    }
+
+    &:hover .cell {
+      stroke: white;
+      filter: url(#fire);
+    }
   }
 
   .circle {
-    fill: yellow;
+    fill: var(--chevronGridCellStroke);
   }
 
   .cell {
-    fill: gray;
+    fill: var(--hexagonGridCellBackground);
+    stroke: var(--chevronGridCellStroke);
   }
 
   .icon {
-    fill: blue;
+    fill: var(--chevronGridCellStroke);
   }
 
   .frame {
-    fill: red;
+    fill: var(--chevronGridCellStroke);
   }
 `;

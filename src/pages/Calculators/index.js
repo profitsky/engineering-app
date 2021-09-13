@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // STYLED ELEMENTS
 import {
@@ -16,7 +17,7 @@ import RetainingRingsSvgIcon from '../../components/CalcMenuUi/RetainingRingsSvg
 //COMPONENTS
 import Light from '../../components/Ui/Light';
 import HexagonGrid from '../../components/Ui/HexagonGrid';
-import HexagonIcon from '../../components/Ui/HexagonIcon';
+import CalcMenuToolTip from '../../components/CalcMenuToolTip';
 
 //CONTEX
 import OverlayContext from '../../context/overlayConext';
@@ -24,25 +25,42 @@ import OverlayContext from '../../context/overlayConext';
 //HOOKS
 import useMousePosition from '../../hooks/useMousePosition';
 
+const labels = [
+  'fits and tolerances',
+  'counterbore and countersink',
+  'retaining rings',
+];
+
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
-
   const mousePosition = useMousePosition();
+  darkOverlay.onChange(true);
 
-  useEffect(() => {
-    darkOverlay.onChange(true);
-  }, []);
+  const [content, setContent] = useState(' ');
+
+  function handleOnHover(isHovered, ref) {
+    setContent(isHovered ? ref.toUpperCase() : '');
+  }
 
   return (
     <CalcWrapper>
       <CalcSceneWrapper>
-        <CalcOverlay></CalcOverlay>
+        <CalcOverlay>
+          <CalcMenuToolTip content={content}></CalcMenuToolTip>
+        </CalcOverlay>
+
         <Light mousePosition={mousePosition} />
         <CalcScene>
           <HexagonGrid />
-          <FitsAndTolerancesSvgIcon />
-          <CouterboreAndCountersinkIcon />
-          <RetainingRingsSvgIcon />
+          <Link to='/calculators/fitsandtolerances'>
+            <FitsAndTolerancesSvgIcon handleOnHover={handleOnHover} />
+          </Link>
+          <Link to='/calculators/counterboreandcountersink'>
+            <CouterboreAndCountersinkIcon handleOnHover={handleOnHover} />
+          </Link>
+          <Link to='/calculators/retainingrings'>
+            <RetainingRingsSvgIcon handleOnHover={handleOnHover} />
+          </Link>
         </CalcScene>
       </CalcSceneWrapper>
     </CalcWrapper>

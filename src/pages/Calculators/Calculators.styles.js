@@ -26,7 +26,6 @@ export const CalcScene = styled.div`
   left: 0;
   transform-origin: left;
   transform: rotateY(2deg) translateY(-10%);
-  filter: blur(0.5px);
 `;
 
 export const CalcOverlay = styled.div`
@@ -37,9 +36,11 @@ export const CalcOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(18, 15, 25, 0.5);
+  z-index: 1;
+
   background: linear-gradient(
     140deg,
-    rgba(18, 15, 25, 0.5) 0%,
+    rgba(18, 15, 25, 0.2) 0%,
     rgba(37, 43, 52, 0.5) 32%,
     rgba(139, 143, 145, 0.5) 100%
   );

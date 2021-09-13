@@ -3,17 +3,15 @@ import styled from 'styled-components';
 export const HexagonGridMainContainer = styled.section`
   width: 100%;
   height: 100%;
-  top: -15vh;
+  top: -10vh;
   left: 14vw;
   position: fixed;
-  transform: scale(1.5);
-  border: 1px solid yellow;
 `;
 
 export const HexagonGridSvg = styled.svg`
   transform: scale(1.5);
   position: fixed;
-  top: 0;
+  top: 38px;
   left: 290px;
   width: 100%;
   height: 100%;

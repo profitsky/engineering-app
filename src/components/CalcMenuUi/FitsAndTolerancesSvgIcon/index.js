@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { SvgIcon } from './FitsAndTolerancesSvgIcon.styles';
 
-const FitsAndTolerancesSvgIcon = () => {
+const FitsAndTolerancesSvgIcon = ({ handleOnHover }) => {
+  const buttonRef = useRef();
   return (
-    // <SvgIconContainer>
     <SvgIcon
       width='1294'
       height='1006'
       viewBox='0 0 1294 1006'
       xmlns='http://www.w3.org/2000/svg'
+      label='fits and tolerances'
+      onMouseEnter={() => {
+        handleOnHover(true, buttonRef.current.getAttribute('label'));
+      }}
+      onMouseLeave={() => {
+        handleOnHover(false, buttonRef);
+      }}
+      ref={buttonRef}
     >
       <g className='fits'>
         <path
           className='cell'
           d='M80.0046 319.8L104.715 362.6H154.135L178.845 319.8L154.135 277H104.715L80.0046 319.8Z'
-          stroke='#B1CBDA'
         />
         <g className='circle'>
           <path d='M128.476 283.763C125.912 283.83 123.415 284.164 121.012 284.738L122.978 292.074C124.753 291.663 126.591 291.418 128.476 291.356V283.763Z' />
@@ -53,20 +60,44 @@ const FitsAndTolerancesSvgIcon = () => {
           <path d='M109.005 318H111.567V333H109.005V318Z' />
           <path d='M121.817 323.625H150.005V327.375H121.817V332.062L112.848 325.5L121.817 318.938V323.625Z' />
           <path d='M137.192 312.375H109.005V308.625H137.192V303.938L146.161 310.5L137.192 317.062V312.375Z' />
-          <path d='M147.442 303H150.005V318H147.442V303Z' stroke='#B1CBDA' />
-          <path d='M109.005 318H111.567V333H109.005V318Z' stroke='#B1CBDA' />
-          <path
-            d='M121.817 323.625H150.005V327.375H121.817V332.062L112.848 325.5L121.817 318.938V323.625Z'
-            stroke='#B1CBDA'
-          />
-          <path
-            d='M137.192 312.375H109.005V308.625H137.192V303.938L146.161 310.5L137.192 317.062V312.375Z'
-            stroke='#B1CBDA'
-          />
+          <path d='M147.442 303H150.005V318H147.442V303Z' />
+          <path d='M109.005 318H111.567V333H109.005V318Z' />
+          <path d='M121.817 323.625H150.005V327.375H121.817V332.062L112.848 325.5L121.817 318.938V323.625Z' />
+          <path d='M137.192 312.375H109.005V308.625H137.192V303.938L146.161 310.5L137.192 317.062V312.375Z' />
         </g>
       </g>
+      <filter
+        id='fire'
+        width='110%'
+        height='110%'
+        x='-10%'
+        y='-10%'
+        filterUnits='userSpaceOnUse'
+      >
+        <feFlood result='flood' floodColor='#ffaf46' floodOpacity='1'></feFlood>
+        <feComposite
+          in='flood'
+          result='mask'
+          in2='SourceGraphic'
+          operator='in'
+        ></feComposite>
+        <feMorphology
+          in='mask'
+          result='dilated'
+          operator='dilate'
+          radius='1.5'
+        ></feMorphology>
+        <feGaussianBlur
+          in='dilated'
+          result='blurred'
+          stdDeviation='7'
+        ></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in='blurred'></feMergeNode>
+          <feMergeNode in='SourceGraphic'></feMergeNode>
+        </feMerge>
+      </filter>
     </SvgIcon>
-    // </SvgIconContainer>
   );
 };
 

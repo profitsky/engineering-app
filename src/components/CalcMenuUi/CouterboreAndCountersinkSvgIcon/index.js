@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion } from 'framer-motion';
 
 import { SvgIcon } from './CouterboreAndCountersinkSvgIcon.styles';
 
-const CouterboreAndCountersinkSvgIcon = () => {
+const CouterboreAndCountersinkSvgIcon = ({ handleOnHover }) => {
+  const buttonRef = useRef();
   return (
     <SvgIcon
       width='1294'
       height='1006'
       viewBox='0 0 1294 1006'
       xmlns='http://www.w3.org/2000/svg'
+      label='couterbore and countersink'
+      onMouseEnter={() => {
+        handleOnHover(true, buttonRef.current.getAttribute('label'));
+      }}
+      onMouseLeave={() => {
+        handleOnHover(false, buttonRef);
+      }}
+      ref={buttonRef}
     >
       <g className='cbore'>
         <path
           className='cell'
           d='M79.0536 685.8L103.764 728.6H153.184L177.894 685.8L153.184 643H103.764L79.0536 685.8Z'
-          stroke='white'
         />
         <g className='circle'>
           <path d='M127.525 649.763C124.962 649.83 122.465 650.164 120.061 650.738L122.027 658.074C123.802 657.663 125.64 657.418 127.525 657.356V649.763Z' />
@@ -52,6 +61,38 @@ const CouterboreAndCountersinkSvgIcon = () => {
           d='M149.073 683.455H145.032C143.925 676.319 138.272 670.666 131.135 669.559V665.518H126.01V669.559C118.874 670.666 113.221 676.319 112.114 683.455H108.073V688.58H112.114C113.221 695.717 118.874 701.37 126.01 702.477V706.518H131.135V702.477C138.272 701.37 143.925 695.717 145.032 688.58H149.073V683.455ZM139.817 683.455H135.822C135.051 681.272 133.319 679.54 131.135 678.768V674.773C135.44 675.755 138.836 679.15 139.817 683.455ZM128.573 688.58C127.158 688.58 126.01 687.432 126.01 686.018C126.01 684.603 127.158 683.455 128.573 683.455C129.987 683.455 131.135 684.603 131.135 686.018C131.135 687.432 129.987 688.58 128.573 688.58ZM126.01 674.773V678.768C123.827 679.54 122.095 681.272 121.324 683.455H117.329C118.31 679.15 121.705 675.755 126.01 674.773ZM117.329 688.58H121.324C122.095 690.763 123.827 692.496 126.01 693.267V697.262C121.705 696.281 118.31 692.885 117.329 688.58ZM131.135 697.262V693.267C133.319 692.496 135.051 690.763 135.822 688.58H139.817C138.836 692.885 135.44 696.281 131.135 697.262Z'
         />
       </g>
+
+      <filter
+        id='fire'
+        width='110%'
+        height='110%'
+        x='-10%'
+        y='-10%'
+        filterUnits='userSpaceOnUse'
+      >
+        <feFlood result='flood' floodColor='#ffaf46' floodOpacity='1'></feFlood>
+        <feComposite
+          in='flood'
+          result='mask'
+          in2='SourceGraphic'
+          operator='in'
+        ></feComposite>
+        <feMorphology
+          in='mask'
+          result='dilated'
+          operator='dilate'
+          radius='1.5'
+        ></feMorphology>
+        <feGaussianBlur
+          in='dilated'
+          result='blurred'
+          stdDeviation='7'
+        ></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in='blurred'></feMergeNode>
+          <feMergeNode in='SourceGraphic'></feMergeNode>
+        </feMerge>
+      </filter>
     </SvgIcon>
   );
 };
