@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     
         --maxWidth: 1280px;
         --minHeight: 768px;
+        --maxHeight: 768px;
         --bluishCyan: #08151B;
         --orange: #ffaf46;
         --white: #fff;

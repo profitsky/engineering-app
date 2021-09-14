@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // STYLED ELEMENTS
@@ -26,9 +26,12 @@ import OverlayContext from '../../context/overlayConext';
 import useMousePosition from '../../hooks/useMousePosition';
 
 const Calculators = () => {
-  const darkOverlay = useContext(OverlayContext);
   const mousePosition = useMousePosition();
-  darkOverlay.onChange(true);
+  const darkOverlay = useContext(OverlayContext);
+
+  useEffect(() => {
+    darkOverlay.onChange(true);
+  }, []);
 
   const [content, setContent] = useState(' ');
   const [hover, setHover] = useState(false);
