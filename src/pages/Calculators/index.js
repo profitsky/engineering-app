@@ -25,28 +25,24 @@ import OverlayContext from '../../context/overlayConext';
 //HOOKS
 import useMousePosition from '../../hooks/useMousePosition';
 
-const labels = [
-  'fits and tolerances',
-  'counterbore and countersink',
-  'retaining rings',
-];
-
 const Calculators = () => {
   const darkOverlay = useContext(OverlayContext);
   const mousePosition = useMousePosition();
   darkOverlay.onChange(true);
 
   const [content, setContent] = useState(' ');
+  const [hover, setHover] = useState(false);
 
   function handleOnHover(isHovered, ref) {
     setContent(isHovered ? ref.toUpperCase() : '');
+    setHover(isHovered);
   }
 
   return (
     <CalcWrapper>
       <CalcSceneWrapper>
         <CalcOverlay>
-          <CalcMenuToolTip content={content}></CalcMenuToolTip>
+          <CalcMenuToolTip content={content} hover={hover}></CalcMenuToolTip>
         </CalcOverlay>
 
         <Light mousePosition={mousePosition} />

@@ -10,7 +10,7 @@ const RetainingRingsSvgIcon = ({ handleOnHover }) => {
       height='1006'
       viewBox='0 0 1294 1006'
       xmlns='http://www.w3.org/2000/svg'
-      label='retainin rings'
+      label='retaining rings'
       onMouseEnter={() => {
         handleOnHover(true, buttonRef.current.getAttribute('label'));
       }}
