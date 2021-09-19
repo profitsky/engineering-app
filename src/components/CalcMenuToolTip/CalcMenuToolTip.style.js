@@ -34,7 +34,6 @@ export const CalMenuToolTipSvg = styled.svg`
   .frame {
     stroke: white;
     filter: url(#fire);
-    letter-spacing: ;
   }
 `;
 

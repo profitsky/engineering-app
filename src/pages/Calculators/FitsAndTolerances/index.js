@@ -4,46 +4,29 @@ import React from 'react';
 import {
   FitsMainContainer,
   FitsGrid,
-  FitsResult,
-  FitsDiagram,
-  FitsInputParameters,
-  HoleParameters,
-  ShaftParameters,
-  FitsSummary,
+  topRightCell,
+  bottomRightCell,
 } from './FitsAndTolerances.styles';
 
 //COMPONENTS
-import GridHeader from '../../../components/GridHeader';
-import GridInput from '../../../components/GridInput';
+import FitsInputParameters from '../../../components/FitsInputParameters';
+import FitsDiagram from '../../../components/FitsDiagram';
+import FitsChart from '../../../components/FitsChart';
+import FitsHoleAndShaft from '../../../components/FitsHoleAndShaft';
+import FitsSummary from '../../../components/FitsSummary';
+import SquareGrid from '../../../components/Ui/SquareGrid';
 
 const FitsAndTolerances = () => {
   return (
     <FitsMainContainer>
+      <SquareGrid />
       <FitsGrid>
-        <FitsInputParameters>
-          <GridHeader primary headerContent='input parameters' />
-          <GridHeader headerContent='nominal size' />
-          <GridInput />
-          <GridHeader headerContent='mm' />
-          <GridHeader headerContent='hole tolerance' />
-
-          <GridHeader headerContent='shaft tolerance' />
-        </FitsInputParameters>
-        <FitsResult>
-          <GridHeader headerContent='result' />
-        </FitsResult>
-        <FitsDiagram>
-          <GridHeader headerContent='diagram' primary />
-        </FitsDiagram>
-        <HoleParameters>
-          <GridHeader headerContent='hole' primary />
-        </HoleParameters>
-        <ShaftParameters>
-          <GridHeader headerContent='shaft' primary />
-        </ShaftParameters>
-        <FitsSummary>
-          <GridHeader headerContent='fit' primary='primary' />
-        </FitsSummary>
+        <FitsInputParameters />
+        <FitsChart as={bottomRightCell} />
+        <FitsDiagram as={topRightCell} />
+        <FitsHoleAndShaft />
+        <FitsHoleAndShaft />
+        <FitsSummary />
       </FitsGrid>
     </FitsMainContainer>
   );
