@@ -15,19 +15,21 @@ import FitsChart from '../../../components/FitsChart';
 import FitsHoleAndShaft from '../../../components/FitsHoleAndShaft';
 import FitsSummary from '../../../components/FitsSummary';
 import SquareGrid from '../../../components/Ui/SquareGrid';
+import HudCompass from '../../../components/HudCompass';
 
 const FitsAndTolerances = () => {
   return (
     <FitsMainContainer>
       <SquareGrid />
-      <FitsGrid>
+      <HudCompass />
+      {/* <FitsGrid>
         <FitsInputParameters />
         <FitsChart as={bottomRightCell} />
         <FitsDiagram as={topRightCell} />
         <FitsHoleAndShaft />
         <FitsHoleAndShaft />
         <FitsSummary />
-      </FitsGrid>
+      </FitsGrid> */}
     </FitsMainContainer>
   );
 };
